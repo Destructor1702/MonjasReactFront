@@ -6,9 +6,9 @@ import 'bulma/css/bulma.css'
 class App extends Component {
     render() {
         return (
-            <div className="hero has-addons-centered has-text-centered">
+            <div className="column is-8 is-offset-2 hero has-text-centered has-shadow">
                 <div className="hero-head">
-                    <div className="title">boilerplate</div>
+                    <div className=" card title">boilerplate</div>
                 </div>
                 <div className="hero-body">
 
