@@ -6,16 +6,28 @@ import 'bulma/css/bulma.css'
 class App extends Component {
     render() {
         return (
-            <div className="column is-8 is-offset-2 hero has-text-centered has-shadow">
+            <div className="column card is-8 is-offset-2 hero has-text-centered has-shadow">
                 <div className="hero-head">
-                    <div className=" card title">boilerplate</div>
+                    <div className="  title">boilerplate</div>
+                    <div className="box cta">
+                        <div className="columns is-mobile is-centered">
+                            <div className="field is-grouped is-grouped-multiline">
+                                <div className="control"><span className="tag is-link is-large">Link</span></div>
+                                <div className="control"><span className="tag is-success is-large">Success</span></div>
+                                <div className="control"><span className="tag is-black is-large">Black</span></div>
+                                <div className="control"><span className="tag is-warning is-large">Warning</span></div>
+                                <div className="control"><span className="tag is-danger is-large">Danger</span></div>
+                                <div className="control"><span className="tag is-info is-large">Info</span></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div className="hero-body">
 
 
-                    <table className="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+                    <table className="table is-bordered is-narrow is-hoverable is-fullwidth">
                         <thead>
-                        <tr>
+                        <tr className="is-selected">
                             <th><abbr title="Position">Pos</abbr></th>
                             <th>Team</th>
                             <th><abbr title="Played">Pld</abbr></th>
@@ -29,21 +41,6 @@ class App extends Component {
                             <th>Qualification or relegation</th>
                         </tr>
                         </thead>
-                        <tfoot>
-                        <tr>
-                            <th><abbr title="Position">Pos</abbr></th>
-                            <th>Team</th>
-                            <th><abbr title="Played">Pld</abbr></th>
-                            <th><abbr title="Won">W</abbr></th>
-                            <th><abbr title="Drawn">D</abbr></th>
-                            <th><abbr title="Lost">L</abbr></th>
-                            <th><abbr title="Goals for">GF</abbr></th>
-                            <th><abbr title="Goals against">GA</abbr></th>
-                            <th><abbr title="Goal difference">GD</abbr></th>
-                            <th><abbr title="Points">Pts</abbr></th>
-                            <th>Qualification or relegation</th>
-                        </tr>
-                        </tfoot>
                         <tbody>
                         <tr>
                             <th>1</th>
@@ -94,7 +91,7 @@ class App extends Component {
                                 href="https://en.wikipedia.org/wiki/2016%E2%80%9317_UEFA_Champions_League#Group_stage"
                                 title="2016–17 UEFA Champions League">Champions League group stage</a></td>
                         </tr>
-                        <tr className="is-selected">
+                        <tr>
                             <th>4</th>
                             <td><a href="https://en.wikipedia.org/wiki/Manchester_City_F.C."
                                    title="Manchester City F.C.">Manchester
@@ -115,6 +112,34 @@ class App extends Component {
                         </tbody>
                     </table>
 
+                </div>
+                <div className="column is-3 is-narrow">
+                    <article className="message is-warning has-shadow">
+                        <div className="message-header">
+                            <p>Season 1</p>
+                            <button className="delete" aria-label="delete"/>
+                        </div>
+                        <div className="message-body">
+                            <div className="board-item">
+                                <div className="board-item-content"><span>The Fort</span></div>
+                            </div>
+                            <div className="board-item">
+                                <div className="board-item-content"><span>Fist Like a bullet</span></div>
+                            </div>
+                            <div className="board-item">
+                                <div className="board-item-content"><span>White Stork Spreads Wings</span></div>
+                            </div>
+                            <div className="board-item">
+                                <div className="board-item-content"><span>Two Tigers Subdue Dragons</span></div>
+                            </div>
+                            <div className="board-item">
+                                <div className="board-item-content"><span>Snake Creeps Down</span></div>
+                            </div>
+                            <div className="board-item">
+                                <div className="board-item-content"><span>Hand of Five Poisons</span></div>
+                            </div>
+                        </div>
+                    </article>
                 </div>
             </div>
         );
