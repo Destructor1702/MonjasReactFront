@@ -5,7 +5,12 @@ const errorWarning = <div className="notification is-warning">
     <strong> error </strong> al consultar la informacion
 </div>;
 
-const SmartTable = ({dataArray}) => {
+const SmartTable = ({dataArray, loading}) => {
+    if (loading) {
+        return <div className="notification">
+            <br/><br/><strong> Cargando </strong><br/><br/>
+        </div>
+    }
 
     if (!dataArray || !dataArray.length) {
         return errorWarning
