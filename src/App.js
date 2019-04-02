@@ -1,20 +1,14 @@
-import React, {Component} from 'react';
+import React, {Component} from 'react'
 import 'bulma/css/bulma.css'
-import SmartTable from "./components/SmartTable";
-import ProgramaGeneral from "./components/ProgramaGeneral";
-import api from "./api"
+import ProgramaGeneral from "./components/ProgramaGeneral"
 import Equipos from "./components/Equipos"
+import Mapa from "./components/Mapa"
 
 class App extends Component {
     constructor(props) {
         super(props);
         this.state = {activeTab: 0, data: []};
         this.tabs = ["Programa General", "Equipos", "Mapa"]
-    }
-
-    async componentDidMount() {
-        this.setState({data: await api.getTeamList()})
-        this.parseData()
     }
 
     switchTab(tabNumber) {
@@ -31,7 +25,8 @@ class App extends Component {
                     <ul>
                         {this.tabs.map((tab, i) => <li key={i}
                                                        className={i === st.activeTab ? "is-active" : ""}
-                                                       onClick={() => this.switchTab(i)}><a>{tab}</a></li>)}
+                                                       onClick={() => this.switchTab(i)}><a>{tab}</a></li>)
+                        }
                     </ul>
                 </div>
 
@@ -44,19 +39,13 @@ class App extends Component {
                     : null}
                 </div>
                 <div>{(this.state.activeTab === 2)
-                    ? <div>Mapa</div>
+                    ? <Mapa/>
                     : null}
                 </div>
 
 
             </div>
         );
-    }
-
-    parseData() {
-        let rawData = this.state.data;
-        //transform data here
-        this.setState({data: rawData})
     }
 
 

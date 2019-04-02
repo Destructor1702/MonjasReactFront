@@ -1,19 +1,19 @@
 import React, {Component} from 'react';
 import 'bulma/css/bulma.css'
-import SmartTable from "../../components/SmartTable";
-
-
+import Edades from "../../components/Edades";
 
 
 class Equipos extends Component {
     constructor(props) {
         super(props);
         this.state = {activeTab: 0, genderSelection: props.genderSelection};
-        this.tabs = [ "basketball", "soccer", "volleyball"];
-        this.parentTabs = ["Varonil", "Femenil"]
+        this.tabs = ["Basquetbol", "Futbol", "Volleyball"];
     }
 
     render() {
+        this.tabs = (this.state.genderSelection() === 0)
+            ? ["Basquetbol", "Futbol", "Volleyball"]
+            : ["Basquetbol", "Futbol", "Volleyball", "Porristas"];
         return (
             <div>
 
@@ -24,14 +24,12 @@ class Equipos extends Component {
                     </ul>
                 </div>
 
-
-                <div> {this.tabs[this.state.activeTab]}- {this.parentTabs[this.state.genderSelection()]}</div>
-
+                <Edades sportSelection={() => this.state.activeTab}
+                        genderSelection={() => this.state.genderSelection()}/>
 
             </div>
         );
     }
-
 
 
     switchTab(tabNumber) {
