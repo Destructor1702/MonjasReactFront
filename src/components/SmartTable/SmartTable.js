@@ -2,11 +2,12 @@ import React from 'react';
 import 'bulma/css/bulma.css'
 
 const errorWarning = <div className="notification is-warning">
-    <strong> error </strong> ha ocurrido un error al consultar la informacion
+    <strong> error </strong> al consultar la informacion
 </div>;
 
 const SmartTable = ({dataArray}) => {
-    if (!dataArray.length) {
+
+    if (!dataArray || !dataArray.length) {
         return errorWarning
     }
 
@@ -21,10 +22,9 @@ const SmartTable = ({dataArray}) => {
         </thead>
 
         <tbody>
-        {dataArray.map(entry => <tr>
-            {objKeys.map(key => <th>{entry[key]}</th>)}
+        {dataArray.map((entry,i) => <tr key={i}>
+                {objKeys.map(key => <th>{entry[key]}</th>)}
             </tr>
-
         )}
         </tbody>
 
