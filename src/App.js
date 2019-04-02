@@ -19,7 +19,16 @@ class App extends Component {
         let st = this.state;
         return (
 
-            <div className="column is-8 is-offset-2 has-text-centered">
+            <div className=" column is-10 is-offset-1 has-text-centered">
+                <section className="hero is-info has-text-left">
+                    <div className="hero-body">
+                        <div className="container">
+                            <h1 className="title">
+                                Juegos Intersalecianos   XXI 2019
+                            </h1>
+                        </div>
+                    </div>
+                </section>
 
                 <div className="tabs">
                     <ul>
