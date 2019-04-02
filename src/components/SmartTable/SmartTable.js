@@ -22,13 +22,16 @@ const SmartTable = ({dataArray, loading}) => {
 
         <thead>
         <tr className="is-selected">
-            {objKeys.map(key => <th>{key}</th>)}
+            {objKeys.map(key => (key === "createdAt" || key === "updatedAt") ? null : <th>{key}</th>)}
         </tr>
         </thead>
 
         <tbody>
-        {dataArray.map((entry,i) => <tr key={i}>
-                {objKeys.map(key => <th>{entry[key]}</th>)}
+        {dataArray.map((entry, i) => <tr key={i}>
+                {objKeys.map(key => (key === "createdAt" || key === "updatedAt")
+                    ? null
+                    : <th>{entry[key]}</th>)
+                }
             </tr>
         )}
         </tbody>

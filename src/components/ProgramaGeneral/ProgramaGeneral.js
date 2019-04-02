@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import 'bulma/css/bulma.css'
 import api from "../../api";
 import SmartTable from "../SmartTable";
+import schImg from "../../assets/schedule.jpg";
 
 
 class ProgramaGeneral extends Component {
@@ -12,18 +13,17 @@ class ProgramaGeneral extends Component {
     }
 
 
-
     render() {
         return (
             <div>
                 <h3 className="title">Programa Genereal</h3>
                 <div className="content">
-                     <p>Bienvenido a los XXI Juegos Intersalesianos, en este apartado podrás obtener información
-                         referente al evento, ya sea sobre el mismo, o sobre los equipos que participarán en las
-                         diferentes categorias deportivas.
-                         <br/><br/>
-                         Elige una de las opciones de acuerdo a la informacion que deseas consultar.
-                     </p>
+                    <p>Bienvenido a los XXI Juegos Intersalesianos, en este apartado podrás obtener información
+                        referente al evento, ya sea sobre el mismo, o sobre los equipos que participarán en las
+                        diferentes categorias deportivas.
+                        <br/><br/>
+                        Elige una de las opciones de acuerdo a la informacion que deseas consultar.
+                    </p>
 
                 </div>
                 <div className="tabs">
@@ -37,8 +37,15 @@ class ProgramaGeneral extends Component {
                 </div>
 
                 <div>{(this.state.activeTab === 0)
-                    ? <div><div>Horarios</div><SmartTable dataArray={new Array(10).fill({x:1,y:2,z:3})}/></div>
-                    : null}
+                    ? <div className="card has-shadow">
+                        <figure className="image">
+                            <img src={schImg} alt="horario"/>
+                        </figure>
+                    </div>
+
+                    : null
+
+                }
                 </div>
 
                 <div>{(this.state.activeTab === 1)

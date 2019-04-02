@@ -3,6 +3,8 @@ import 'bulma/css/bulma.css'
 import ProgramaGeneral from "./components/ProgramaGeneral"
 import Equipos from "./components/Equipos"
 import Mapa from "./components/Mapa"
+import logo from "./assets/logo.jpg"
+import schImg from "./assets/schedule.jpg";
 
 class App extends Component {
     constructor(props) {
@@ -20,14 +22,15 @@ class App extends Component {
         return (
 
             <div className="box column is-10 is-offset-1 has-text-centered">
-                <section className="hero is-info has-text-left">
-                    <div className="hero-body">
+                <section className="hero  has-text-left">
+
                         <div className="container">
-                            <h1 className="title">
-                                Juegos Intersalecianos XXI 2019
-                            </h1>
-                        </div>
-                    </div>
+                            <figure className="image is-128x128 is-4">
+                                <img src={logo} alt="horario"/>
+                            </figure>
+                            <strong>Juegos Intersalecianos XXI 2019</strong>
+                        </div><br/>
+
                 </section>
 
                 <div className="tabs">
