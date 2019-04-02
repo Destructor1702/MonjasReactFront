@@ -19,12 +19,12 @@ class App extends Component {
         let st = this.state;
         return (
 
-            <div className=" column is-10 is-offset-1 has-text-centered">
+            <div className="box column is-10 is-offset-1 has-text-centered">
                 <section className="hero is-info has-text-left">
                     <div className="hero-body">
                         <div className="container">
                             <h1 className="title">
-                                Juegos Intersalecianos   XXI 2019
+                                Juegos Intersalecianos XXI 2019
                             </h1>
                         </div>
                     </div>
@@ -32,9 +32,11 @@ class App extends Component {
 
                 <div className="tabs">
                     <ul>
-                        {this.tabs.map((tab, i) => <li key={i}
-                                                       className={i === st.activeTab ? "is-active" : ""}
-                                                       onClick={() => this.switchTab(i)}><a>{tab}</a></li>)
+                        {
+                            this.tabs.map((tab, i) => <li key={i}
+                                                          className={i === st.activeTab ? "is-active" : ""}
+                                // eslint-disable-next-line
+                                                          onClick={() => this.switchTab(i)}><a>{tab}</a></li>)
                         }
                     </ul>
                 </div>

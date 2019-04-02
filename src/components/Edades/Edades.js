@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import 'bulma/css/bulma.css'
+import api from "../../api"
 import SmartTable from "../../components/SmartTable";
 
 const errorWarning = <div className="notification is-warning">
@@ -18,14 +19,13 @@ class Equipos extends Component {
 
     render() {
         this.errPorr = (this.state.genderSelection() === 0 && this.state.sportSelection() === 3);
-
-
         return (
             <div>
 
                 <div className="tabs">
                     <ul>
                         {this.tabs.map((tab, i) => <li className={i === this.state.activeTab ? "is-active" : ""}
+                            // eslint-disable-next-line
                                                        onClick={() => this.switchTab(i)}><a>{tab}</a></li>)}
                     </ul>
                 </div>
@@ -39,7 +39,13 @@ class Equipos extends Component {
                 <div>{
                     this.errPorr
                         ? errorWarning
-                        : <div>Tabla aqui</div>
+                        : <div>
+                            <div>Tabla aqui</div>
+                            <SmartTable dataArray={ this.tabs }/>
+                            <SmartTable dataArray={ api.getEventInfo()}/>
+                            <SmartTable dataArray={ api.getGameInfo()}/>
+                            <SmartTable dataArray={ api.getTeamList()}/>
+                        </div>
                 }</div>
 
 

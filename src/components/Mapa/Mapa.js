@@ -8,7 +8,7 @@ class Mapa extends Component {
         return (
             <div className="card has-shadow">
                 <figure className="image">
-                    <img src={mapImg} />
+                    <img src={mapImg} alt="MAPA" />
                 </figure>
             </div>
         );

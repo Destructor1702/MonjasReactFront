@@ -31,6 +31,7 @@ class ProgramaGeneral extends Component {
                         {this.tabs.map((tab, i) => <li
                             key={i}
                             className={i === this.state.activeTab ? "is-active" : ""}
+                            // eslint-disable-next-line
                             onClick={() => this.switchTab(i)}><a>{tab}</a></li>)}
                     </ul>
                 </div>
