@@ -32,7 +32,7 @@ class Api {
     };
 
     getEventInfo = async (uuid = {}) => {
-        const params = uuid;
+        const params = {uuid};
         const config = {method: 'GET'};
         const request = await fetch(this.buildRequestUrl('/evento', params).toString(), config);
         if (request.status > 399) {
@@ -42,9 +42,20 @@ class Api {
     };
 
     getGameInfo = async (game = {}) => {
-        const params = game;
+        const params = {game};
         const config = {method: 'GET'};
         const request = await fetch(this.buildRequestUrl('/juego', params).toString(), config);
+        if (request.status > 399) {
+            console.log("Error handling: ", request);
+            throw new Error(request.status.toString());
+        }
+        return request.json();
+    };
+
+    getPorristas = async () => {
+        const params = {};
+        const config = {method: 'GET'};
+        const request = await fetch(this.buildRequestUrl('/porristas', params).toString(), config);
         if (request.status > 399) {
             throw new Error(request.status.toString());
         }

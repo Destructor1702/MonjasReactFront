@@ -29,7 +29,7 @@ class Equipos extends Component {
 
                 <div className="tabs">
                     <ul>
-                        {this.tabs.map((tab, i) => <li className={i === this.state.activeTab ? "is-active" : ""}
+                        {this.tabs.map((tab, i) => <li key={i} className={i === this.state.activeTab ? "is-active" : ""}
                             // eslint-disable-next-line
                                                        onClick={() => this.switchTab(i)}><a>{tab}</a></li>)}
                     </ul>
@@ -45,14 +45,19 @@ class Equipos extends Component {
                     this.errPorr
                         ? errorWarning
                         : <div className="has-text-centered">
-                            <div>teamList</div>
-                            <SmartTable dataArray={this.state.teamList} loading={this.state.loading}/>
-                            <div>cataegories</div>
-                            <SmartTable dataArray={this.state.categories} loading={this.state.loading}/>
-                            <div>Eventos</div>
-                            <SmartTable dataArray={this.state.eventInfo} loading={this.state.loading}/>
-                            <div>GameInfo</div>
-                            <SmartTable dataArray={this.state.gameInfo} loading={this.state.loading}/>
+
+
+                            <div>categories => Game</div>
+                            {this.state.parsedGames && this.state.parsedGames.map((e, i) => <SmartTable
+                                key={i}
+                                dataArray={e}
+                                loading={this.state.loading}
+                            />)}
+
+                            <div>Porristas</div>
+                            <SmartTable dataArray={this.state.porristas} loading={this.state.loading}/>
+
+
                         </div>
                 }</div>
 
@@ -62,23 +67,22 @@ class Equipos extends Component {
     }
 
 
-    switchTab(tabNumber) {
-        this.setState({activeTab: tabNumber})
-    }
+    switchTab(tabNumber) {this.setState({activeTab: tabNumber})}
 
 
     parseData() {
-        let rawData = this.state.data;
-        //transform data here
-        this.setState({data: rawData})
+        let cats = this.state.categories && this.state.categories.map(cat => (cat.uuid));
+        let relGames = cats.map(async cat => await api.getGameInfo(cat));
+        this.setState({parsedGames: relGames})
     }
 
     async componentDidMount() {
         this.setState({
-            teamList: await api.getTeamList(),
             categories: await api.getCategories(),
             eventInfo: await api.getEventInfo(),
-            gameInfo: await api.getGameInfo()
+            gameInfo: await api.getGameInfo(),
+            porristas: await api.getPorristas(),
+            parsedGames: undefined
         });
         this.parseData();
         this.setState({loading: false})

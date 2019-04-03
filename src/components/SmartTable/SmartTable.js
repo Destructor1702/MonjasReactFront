@@ -6,15 +6,14 @@ const errorWarning = <div className="notification is-warning">
 </div>;
 
 const SmartTable = ({dataArray, loading}) => {
+
     if (loading) {
         return <div className="notification">
             <br/><br/><strong> Cargando </strong><br/><br/>
         </div>
     }
 
-    if (!dataArray || !dataArray.length) {
-        return errorWarning
-    }
+    if (!dataArray || !dataArray.length) { return  errorWarning }
 
     let objKeys = Object.keys(dataArray[0]);
 
@@ -22,7 +21,7 @@ const SmartTable = ({dataArray, loading}) => {
 
         <thead>
         <tr className="is-selected">
-            {objKeys.map(key => (key === "createdAt" || key === "updatedAt") ? null : <th>{key}</th>)}
+            {objKeys.map(key => (key === "createdAt" || key === "updatedAt") ? null : <th key={key}>{key}</th>)}
         </tr>
         </thead>
 
@@ -30,7 +29,7 @@ const SmartTable = ({dataArray, loading}) => {
         {dataArray.map((entry, i) => <tr key={i}>
                 {objKeys.map(key => (key === "createdAt" || key === "updatedAt")
                     ? null
-                    : <th>{entry[key]}</th>)
+                    : <th key={`${key}${i}`}>{entry[key]}</th>)
                 }
             </tr>
         )}

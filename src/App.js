@@ -4,7 +4,6 @@ import ProgramaGeneral from "./components/ProgramaGeneral"
 import Equipos from "./components/Equipos"
 import Mapa from "./components/Mapa"
 import logo from "./assets/logo.jpg"
-import schImg from "./assets/schedule.jpg";
 
 class App extends Component {
     constructor(props) {
@@ -24,12 +23,13 @@ class App extends Component {
             <div className="box column is-10 is-offset-1 has-text-centered">
                 <section className="hero  has-text-left">
 
-                        <div className="container">
-                            <figure className="image is-128x128 is-4">
-                                <img src={logo} alt="horario"/>
-                            </figure>
-                            <strong>Juegos Intersalecianos XXI 2019</strong>
-                        </div><br/>
+                    <div className="container">
+                        <figure className="image is-128x128 is-4">
+                            <img src={logo} alt="horario"/>
+                        </figure>
+                        <strong>Juegos Intersalecianos XXI 2019</strong>
+                    </div>
+                    <br/>
 
                 </section>
 

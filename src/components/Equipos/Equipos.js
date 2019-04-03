@@ -16,7 +16,7 @@ class Equipos extends Component {
 
                 <div className="tabs">
                     <ul>
-                        {this.tabs.map((tab, i) => <li className={i === this.state.activeTab ? "is-active" : ""}
+                        {this.tabs.map((tab, i) => <li key={`${tab}${i}`} className={i === this.state.activeTab ? "is-active" : ""}
                             // eslint-disable-next-line
                                                        onClick={() => this.switchTab(i)}><a>{tab}</a></li>)}
                     </ul>

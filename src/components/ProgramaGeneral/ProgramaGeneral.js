@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import 'bulma/css/bulma.css'
 import api from "../../api";
-import SmartTable from "../SmartTable";
+//import SmartTable from "../SmartTable";
 import schImg from "../../assets/schedule.jpg";
 
 
