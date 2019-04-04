@@ -4,8 +4,12 @@ import ProgramaGeneral from "./components/ProgramaGeneral"
 import Equipos from "./components/Equipos"
 import Mapa from "./components/Mapa"
 import Souvenirs from "./components/Souvenirs"
+import Comida from "./components/Comida"
+import Fotos from "./components/Fotos"
+import Delegaciones from "./components/Delegaciones"
 import logo from "./assets/logo.jpg"
 import "./App.css"
+
 
 
 import img1 from "./assets/souvenirs/1.jpeg"
@@ -25,7 +29,7 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {activeTab: 0, data: []};
-        this.tabs = ["Programa General", "Equipos", "Mapa", "Souvenirs"]
+        this.tabs = ["Programa General", "Equipos", "Mapa", "Souvenirs", "Fotos","Delegaciones", "Comida"]
     }
 
     switchTab(tabNumber) {
@@ -40,10 +44,10 @@ class App extends Component {
                 <section className="hero  has-text-left">
 
                     <div className="container">
-                        <figure className="image is-128x128 is-4">
+                        <figure className="image is-128x128 is-4 ">
                             <img src={logo} alt="horario"/>
                         </figure>
-                        <strong>Juegos Intersalecianos XXI 2019</strong>
+                        <strong>Juegos Intersalesianos XXI 2019</strong>
                     </div>
                     <br/>
 
@@ -75,6 +79,18 @@ class App extends Component {
                 </div>
                 <div>{(this.state.activeTab === 3)
                     ? <Souvenirs images={imagesSouv}/>
+                    : null}
+                </div>
+                <div>{(this.state.activeTab === 4)
+                    ? <Fotos />
+                    : null}
+                </div>
+                <div>{(this.state.activeTab === 5)
+                    ? <Delegaciones />
+                    : null}
+                </div>
+                <div>{(this.state.activeTab === 6)
+                    ? <Comida/>
                     : null}
                 </div>
 

@@ -79,7 +79,7 @@ class Equipos extends Component {
 
                                 ) ? <SmartTable
                                         ignoreKeys={["createdAt", "updatedAt", "equipoUnoId", "equipoDosId",
-                                            "Id", "userId", "equipoUno.uuid", "equipoDos.uuid", "id", "uuid",
+                                            "Id", "userId", "equipoUno.uuid", "etapa","equipoDos.uuid", "id", "uuid",
                                             "ganadorId", "eventoId", "estado", "categoriumId", "ganador.uuid"]}
                                         key={i}
                                         dataArray={entry}
