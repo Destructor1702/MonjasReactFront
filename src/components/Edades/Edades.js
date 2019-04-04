@@ -132,6 +132,9 @@ class Equipos extends Component {
         if ((a === "masculino" || b === "masculino") && (a === "Varonil" || b === "Varonil")) {
             return true
         }
+        if ((a === "femenino" || b === "femenino") && (a === "Femenil" || b === "Femenil")) {
+            return true
+        }
         return (["", "Todos"].includes(b))
             ? true
             : a.toUpperCase() === b.toUpperCase()
