@@ -4,6 +4,7 @@ import ProgramaGeneral from "./components/ProgramaGeneral"
 import Equipos from "./components/Equipos"
 import Mapa from "./components/Mapa"
 import logo from "./assets/logo.jpg"
+import "./App.css"
 
 class App extends Component {
     constructor(props) {

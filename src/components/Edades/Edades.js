@@ -10,35 +10,52 @@ const errorWarning = <div className="notification is-warning">
 class Equipos extends Component {
     constructor(props) {
         super(props);
+        this.tabs = ["Infantil A", "Infantil B", "Juvenil A", "Juvenil B", "Juvenil C", "libre", "Todos"];
         this.state = {
-            activeTab: 0,
+            activeTab: this.tabs.length-1,
             genderSelection: props.genderSelection,
             sportSelection: props.sportSelection,
-            loading: true
+            loading: true,
+            gender: "Todos",
+            sport: "Todos",
+            league: "Todos"
         };
-        this.tabs = ["Infantil A", "Infantil B", "Juvenil A", "Juvenil B", "Juvenil C", "libre"];
-        this.genderTabs = ["Varonil", "Femenil"];
-        this.sporTabs = ["Basquetbol", "Futbol", "Volleyball", "Porristas"];
+
+        this.genderTabs = ["Varonil", "Femenil", "Todos"];
+        this.sporTabs = ["Basquetbol", "Futbol", "Volleyball", "Porristas", "Todos"];
         this.errPorr = false;
     }
 
     render() {
         this.errPorr = (this.state.genderSelection() === 0 && this.state.sportSelection() === 3);
+
+
         return (
             <div>
 
-                <div className="tabs">
-                    <ul>
-                        {this.tabs.map((tab, i) => <li key={i} className={i === this.state.activeTab ? "is-active" : ""}
-                            // eslint-disable-next-line
-                                                       onClick={() => this.switchTab(i)}><a>{tab}</a></li>)}
-                    </ul>
-                </div>
+                {this.state.sportSelection() === 3
+                    ? <div>Porristas</div>
+                    : <div className="tabs ">
+                        <ul>
+                            {this.tabs.map((tab, i) => <li
+                                key={i}
+                                className={i === this.state.activeTab ? "is-active" : ""}
+                                // eslint-disable-next-line
+                                onClick={() => this.switchTab(i)}><a>{tab}</a>
+                            </li>)}
+                        </ul>
+                    </div>
+                }
 
                 <strong>
-                    {this.sporTabs[this.state.sportSelection()]}
-                    - {this.genderTabs[this.state.genderSelection()]}
-                    - {this.tabs[this.state.activeTab]}
+                    {this.state.sport}
+                    {" - "} {this.state.gender}
+                    {" - "}
+                    {
+                        this.state.sportSelection() === 3
+                            ? null
+                            : this.state.league
+                    }
                 </strong>
 
                 <div>{
@@ -46,34 +63,53 @@ class Equipos extends Component {
                         ? errorWarning
                         : <div className="has-text-centered">
 
+                            {this.state.sportSelection() === 3
+                                ? <SmartTable
+                                    ignoreKeys={["createdAt", "updatedAt", "equipoUnoId", "id", "uuid"]}
+                                    dataArray={this.state.porristas}
+                                    loading={this.state.loading}
+                                />
 
-                            <div>categories => Game</div>
-                            {this.state.parsedGames && this.state.parsedGames.map((e, i) => <SmartTable
-                                key={i}
-                                dataArray={e}
-                                loading={this.state.loading}
-                            />)}
-
-                            <div>Porristas</div>
-                            <SmartTable dataArray={this.state.porristas} loading={this.state.loading}/>
+                                : this.state.parsedGames
+                                && this.state.parsedGames.map((entry, i) => (
+                                    this.matches(entry[0]["categorium.genero"], this.state.gender)
+                                    && this.matches(entry[0]["categorium.deporte"], this.state.sport)
+                                    && this.matches(entry[0]["categorium.categoria"], this.state.league)
 
 
+                                ) ? <SmartTable
+                                        ignoreKeys={["createdAt", "updatedAt", "equipoUnoId", "equipoDosId",
+                                            "Id", "userId", "equipoUno.uuid", "equipoDos.uuid", "id", "uuid",
+                                            "ganadorId", "eventoId", "estado", "categoriumId", "ganador.uuid"]}
+                                        key={i}
+                                        dataArray={entry}
+                                        loading={this.state.loading}
+                                    />
+                                    : null)
+                                //endif porristas
+                            }
                         </div>
+                    //endif
                 }</div>
-
-
             </div>
         );
     }
 
 
-    switchTab(tabNumber) {this.setState({activeTab: tabNumber})}
+    switchTab(tabNumber) {
+        this.setState({activeTab: tabNumber})
+        this.setState({
+            gender: this.genderTabs[this.state.genderSelection()],
+            sport: this.sporTabs[this.state.sportSelection()],
+            league: this.tabs[this.state.activeTab]
+        });
+    }
 
 
-    parseData() {
+    async parseData() {
         let cats = this.state.categories && this.state.categories.map(cat => (cat.uuid));
-        let relGames = cats.map(async cat => await api.getGameInfo(cat));
-        this.setState({parsedGames: relGames})
+        await Promise.all(cats.map(cat => api.getGameInfo(cat))).then(x => this.setState({parsedGames: x}));
+
     }
 
     async componentDidMount() {
@@ -84,10 +120,22 @@ class Equipos extends Component {
             porristas: await api.getPorristas(),
             parsedGames: undefined
         });
+
         this.parseData();
         this.setState({loading: false})
     }
 
+    matches(a, b) {
+        if (!a && !b) {
+            return true
+        }
+        if ((a === "masculino" || b === "masculino") && (a === "Varonil" || b === "Varonil")) {
+            return true
+        }
+        return (["", "Todos"].includes(b))
+            ? true
+            : a.toUpperCase() === b.toUpperCase()
+    }
 }
 
 export default Equipos;
