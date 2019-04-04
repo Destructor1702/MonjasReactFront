@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import 'bulma/css/bulma.css'
 import api from "../../api";
-//import SmartTable from "../SmartTable";
+import SmartTable from "../SmartTable";
 import schImg from "../../assets/schedule.jpg";
 
 
@@ -49,7 +49,84 @@ class ProgramaGeneral extends Component {
                 </div>
 
                 <div>{(this.state.activeTab === 1)
-                    ? <div>Colegios</div>
+                    ? <div>
+                        <h3 className="title">Colegios Participantes</h3>
+                        <SmartTable
+                            ignoreKeys={[]}
+                            dataArray={[
+                            {
+                                "Nombre del Colegio": "Colegio América",
+                                "Ciudad": "Acuña Coah.",
+                                "Directora General": "S. Concepción Villagrán"
+                            },
+                            {
+                                "Nombre del Colegio": "Colegio Salesiano",
+                                "Ciudad": "Cd. Obregón",
+                                "Directora General": "S. Isabel Muñiz"
+                            },
+                            {
+                                "Nombre del Colegio": "Colegio Cuauhtémoc",
+                                "Ciudad": "Colima",
+                                "Directora General": "S. María Patricia Magaña"
+                            },
+                            {
+                                "Nombre del Colegio": "Colegio Independencia",
+                                "Ciudad": "Guadalajara",
+                                "Directora General": "S. Verónica Gutiérrez"
+                            },
+                            {
+                                "Nombre del Colegio": "Colegio Modelo",
+                                "Ciudad": "Linares, N.L.",
+                                "Directora General": "S. Myrna E. Rodríguez"
+                            },
+                            {
+                                "Nombre del Colegio": "Colegio Excélsior",
+                                "Ciudad": "Monterrey, N.L.",
+                                "Directora General": "S. Graciela Castaño"
+                            },
+                            {
+                                "Nombre del Colegio": "Instituto Excélsior",
+                                "Ciudad": "Monterrey, N.L.",
+                                "Directora General": "S. Cristina Puntos"
+                            },
+                            {
+                                "Nombre del Colegio": "Colegio Independencia",
+                                "Ciudad": "Monterrey, N.L.",
+                                "Directora General": "S. Norma Alicia Rentería"
+                            },
+                            {
+                                "Nombre del Colegio": "Instituto Colón",
+                                "Ciudad": "Reynosa, Tamps.",
+                                "Directora General": "S. María Ibis García"
+                            },
+                            {
+                                "Nombre del Colegio": "Instituto de Valle Arizpe",
+                                "Ciudad": "Saltillo, Coah.",
+                                "Directora General": "S. Ma. Pueblito Morales"
+                            },
+                            {
+                                "Nombre del Colegio": "Aldea Infantil Pepita de Valle Arizpe",
+                                "Ciudad": "Saltillo, Coah.",
+                                "Directora General": "S. Soraida Moreno"
+                            },
+                            {
+                                "Nombre del Colegio": "Colegio  Maestras de la Fuente",
+                                "Ciudad": "Saltillo, Coah.",
+                                "Directora General": "Lic. Themis Selene Brambila Ledezma"
+                            },
+                            {
+                                "Nombre del Colegio": "Colegio Joannes Paulus II",
+                                "Ciudad": "San Luis Potosí",
+                                "Directora General": "S. María Eugenia Ugalde"
+                            },
+                            {
+                                "Nombre del Colegio": "Juan Melchor Occhiena",
+                                "Ciudad": "Tesistan, Jal.",
+                                "Directora General": "S. Martha Nelly Mozo"
+                            }
+                        ]} />
+                    </div>
+
                     : null}
                 </div>
 
