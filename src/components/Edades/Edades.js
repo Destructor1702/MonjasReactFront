@@ -28,13 +28,13 @@ class Equipos extends Component {
     }
 
     render() {
-        this.errPorr = (this.state.genderSelection() === 0 && this.state.sportSelection() === 3);
+        this.errPorr = (this.props.genderSelection() === 0 && this.props.sportSelection() === 3);
 
 
         return (
             <div>
 
-                {this.state.sportSelection() === 3
+                {this.props.sportSelection() === 3
                     ? <div>Porristas</div>
                     : <div className="tabs ">
                         <ul>
@@ -53,7 +53,7 @@ class Equipos extends Component {
                     {" - "} {this.state.gender}
                     {" - "}
                     {
-                        this.state.sportSelection() === 3
+                        this.props.sportSelection() === 3
                             ? null
                             : this.state.league
                     }
@@ -64,7 +64,7 @@ class Equipos extends Component {
                         ? errorWarning
                         : <div className="has-text-centered">
 
-                            {this.state.sportSelection() === 3
+                            {this.props.sportSelection() === 3
                                 ? <div>{
                                     this.state.ParsedPorristas && this.state.ParsedPorristas.map(x => <SmartTable
                                         ignoreKeys={["createdAt", "updatedAt", "equipoUnoId", "id", "uuid", "userId",
@@ -76,8 +76,8 @@ class Equipos extends Component {
                                 }</div>
                                 : this.state.parsedGames
                                 && this.state.parsedGames.map((entry, i) => (
-                                    this.matches(entry[0]["categorium.genero"], this.state.gender)
-                                    && this.matches(entry[0]["categorium.deporte"], this.state.sport)
+                                    this.matches(entry[0]["categorium.genero"], this.genderTabs[this.props.genderSelection()])
+                                    && this.matches(entry[0]["categorium.deporte"], this.sporTabs[this.props.sportSelection()])
                                     && this.matches(entry[0]["categorium.categoria"], this.state.league)
 
 
