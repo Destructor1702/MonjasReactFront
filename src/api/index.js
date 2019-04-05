@@ -53,7 +53,17 @@ class Api {
     };
 
     getPorristas = async () => {
-        const params = {};
+        const params ={};
+        const config = {method: 'GET'};
+        const request = await fetch(this.buildRequestUrl('/porristas', params).toString(), config);
+        if (request.status > 399) {
+            throw new Error(request.status.toString());
+        }
+        return request.json();
+    };
+
+    getPorristasFull = async (cat) => {
+        const params ={cat};
         const config = {method: 'GET'};
         const request = await fetch(this.buildRequestUrl('/porristas', params).toString(), config);
         if (request.status > 399) {

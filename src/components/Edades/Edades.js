@@ -12,7 +12,7 @@ class Equipos extends Component {
         super(props);
         this.tabs = ["Infantil A", "Infantil B", "Juvenil A", "Juvenil B", "Juvenil C", "libre", "Todos"];
         this.state = {
-            activeTab: this.tabs.length-1,
+            activeTab: this.tabs.length - 1,
             genderSelection: props.genderSelection,
             sportSelection: props.sportSelection,
             loading: true,
@@ -64,12 +64,13 @@ class Equipos extends Component {
                         : <div className="has-text-centered">
 
                             {this.state.sportSelection() === 3
-                                ? <SmartTable
-                                    ignoreKeys={["createdAt", "updatedAt", "equipoUnoId", "id", "uuid"]}
-                                    dataArray={this.state.porristas}
-                                    loading={this.state.loading}
-                                />
-
+                                ? <div>{
+                                    this.state.ParsedPorristas && this.state.ParsedPorristas.map(x => <SmartTable
+                                        ignoreKeys={["createdAt", "updatedAt", "equipoUnoId", "id", "uuid", "userId", "etapa","ganador.uuid","ganadorId","equipoDos.uuid","equipoUno.uuid","eventoId","equipoDosId","categoriumId"]}
+                                        dataArray={x}
+                                        loading={this.state.loading}
+                                    />)
+                                }</div>
                                 : this.state.parsedGames
                                 && this.state.parsedGames.map((entry, i) => (
                                     this.matches(entry[0]["categorium.genero"], this.state.gender)
@@ -79,7 +80,7 @@ class Equipos extends Component {
 
                                 ) ? <SmartTable
                                         ignoreKeys={["createdAt", "updatedAt", "equipoUnoId", "equipoDosId",
-                                            "Id", "userId", "equipoUno.uuid", "etapa","equipoDos.uuid", "id", "uuid",
+                                            "Id", "userId", "equipoUno.uuid", "etapa", "equipoDos.uuid", "id", "uuid",
                                             "ganadorId", "eventoId", "estado", "categoriumId", "ganador.uuid"]}
                                         key={i}
                                         dataArray={entry}
@@ -107,8 +108,11 @@ class Equipos extends Component {
 
 
     async parseData() {
+        let porrCats = this.state.porristas && this.state.porristas.map(cat => (cat.deporte));
+        porrCats = porrCats.sort().filter((item, pos, ary) => !pos || item !== ary[pos - 1]);
         let cats = this.state.categories && this.state.categories.map(cat => (cat.uuid));
         await Promise.all(cats.map(cat => api.getGameInfo(cat))).then(x => this.setState({parsedGames: x}));
+        await Promise.all(porrCats.map(cat => api.getPorristasFull(cat))).then(x => this.setState({ParsedPorristas: x}));
 
     }
 
