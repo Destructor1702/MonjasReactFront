@@ -18,7 +18,8 @@ class Equipos extends Component {
             loading: true,
             gender: "Todos",
             sport: "Todos",
-            league: "Todos"
+            league: "Todos",
+            comparedlist: []
         };
 
         this.genderTabs = ["Varonil", "Femenil", "Todos"];
@@ -41,7 +42,7 @@ class Equipos extends Component {
                                 key={i}
                                 className={i === this.state.activeTab ? "is-active" : ""}
                                 // eslint-disable-next-line
-                                onClick={() => this.switchTab(i)}><a>{tab}</a>
+                                onClick={async () => await this.switchTab(i)}><a>{tab}</a>
                             </li>)}
                         </ul>
                     </div>
@@ -66,7 +67,9 @@ class Equipos extends Component {
                             {this.state.sportSelection() === 3
                                 ? <div>{
                                     this.state.ParsedPorristas && this.state.ParsedPorristas.map(x => <SmartTable
-                                        ignoreKeys={["createdAt", "updatedAt", "equipoUnoId", "id", "uuid", "userId", "etapa","ganador.uuid","ganadorId","equipoDos.uuid","equipoUno.uuid","eventoId","equipoDosId","categoriumId"]}
+                                        ignoreKeys={["createdAt", "updatedAt", "equipoUnoId", "id", "uuid", "userId",
+                                            "etapa", "ganador.uuid", "ganadorId", "equipoDos.uuid", "equipoUno.uuid",
+                                            "eventoId", "equipoDosId", "categoriumId", "marcadorEquipo2", "equipoDos.nombre"]}
                                         dataArray={x}
                                         loading={this.state.loading}
                                     />)
@@ -97,13 +100,16 @@ class Equipos extends Component {
     }
 
 
-    switchTab(tabNumber) {
+    async switchTab(tabNumber) {
+
         this.setState({activeTab: tabNumber})
         this.setState({
             gender: this.genderTabs[this.state.genderSelection()],
             sport: this.sporTabs[this.state.sportSelection()],
-            league: this.tabs[this.state.activeTab]
+            league: this.tabs[tabNumber]
         });
+        await this.parseData();
+
     }
 
 
@@ -113,7 +119,6 @@ class Equipos extends Component {
         let cats = this.state.categories && this.state.categories.map(cat => (cat.uuid));
         await Promise.all(cats.map(cat => api.getGameInfo(cat))).then(x => this.setState({parsedGames: x}));
         await Promise.all(porrCats.map(cat => api.getPorristasFull(cat))).then(x => this.setState({ParsedPorristas: x}));
-
     }
 
     async componentDidMount() {
@@ -130,6 +135,7 @@ class Equipos extends Component {
     }
 
     matches(a, b) {
+
         if (!a && !b) {
             return true
         }
