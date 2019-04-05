@@ -1,0 +1,11 @@
+.tabs li.is-active a {
+    border: 1px solid;
+    border-bottom: none #3273dc;
+    border-top-left-radius: 1em;
+    border-top-right-radius: 1em;
+}
+
+.tabs li {
+
+    transition: border 0s !important;
+}
